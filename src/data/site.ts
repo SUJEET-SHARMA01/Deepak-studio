@@ -5,7 +5,7 @@ import studioTeam from "@/assets/studio-team.jpg";
 
 export const siteConfig = {
   name: "Deepak Studio",
-  email: "hello@lumierestudio.com",
+  email: "deepakstudio@gmail.com",
   phone: "+91 82940 54666",
   whatsapp: "+91 82940 54666",
   location: "Tedhighat Bazar,Andar Road,Siwan, Bihar, India",
