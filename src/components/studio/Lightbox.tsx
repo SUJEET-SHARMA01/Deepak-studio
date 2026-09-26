@@ -1,0 +1,8 @@
+import { useEffect } from "react";
+import { ChevronLeft, ChevronRight, X } from "lucide-react";
+import { Button } from "@/components/ui/button";
+export function Lightbox({ items, index, onClose, onChange }: {items:{title:string;image:string;position:string}[];index:number;onClose:()=>void;onChange:(n:number)=>void}) {
+  useEffect(()=>{ const onKey=(e:KeyboardEvent)=>{if(e.key==="Escape")onClose();if(e.key==="ArrowRight")onChange((index+1)%items.length);if(e.key==="ArrowLeft")onChange((index-1+items.length)%items.length)}; window.addEventListener("keydown",onKey); document.body.style.overflow="hidden"; return()=>{window.removeEventListener("keydown",onKey);document.body.style.overflow=""}},[index,items.length,onClose,onChange]);
+  const item=items[index]; if(!item)return null;
+  return <div className="fixed inset-0 z-[80] grid place-items-center bg-background/95 p-4 backdrop-blur-xl" role="dialog" aria-modal="true" aria-label={item.title}><Button variant="glass" size="icon" className="absolute right-5 top-5" onClick={onClose} aria-label="Close image"><X/></Button><Button variant="glass" size="icon" className="absolute left-4 md:left-8" onClick={()=>onChange((index-1+items.length)%items.length)} aria-label="Previous image"><ChevronLeft/></Button><img src={item.image} alt={item.title} className="max-h-[82vh] max-w-[84vw] rounded-lg object-contain" style={{objectPosition:item.position}}/><Button variant="glass" size="icon" className="absolute right-4 md:right-8" onClick={()=>onChange((index+1)%items.length)} aria-label="Next image"><ChevronRight/></Button><p className="absolute bottom-5 font-display text-xl">{item.title}</p></div>
+}
